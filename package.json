@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "tailwind:dev": "tailwindcss -i ./web/css/index.css -o ./public/index.css"
+    "tailwind:dev": "tailwindcss -i ./web/css/index.css -o ./public/index.css",
+    "tailwind:prod": "tailwindcss -i ./web/css/index.css -o ./public/index.css --minify"
   },
   "devDependencies": {
     "prettier": "^3.1.0",

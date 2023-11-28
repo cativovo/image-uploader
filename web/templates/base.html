@@ -32,7 +32,7 @@
         req.send(formData);
       }
 
-      async function handleDrop(e) {
+      function handleDrop(e) {
         e.preventDefault();
         const validMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
         const file = e.dataTransfer.files[0];

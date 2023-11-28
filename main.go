@@ -30,6 +30,11 @@ func main() {
 	})
 
 	r.Post("/upload", func(w http.ResponseWriter, r *http.Request) {
+		if stat, err := os.Stat(storageDirPath); err != nil || !stat.IsDir() {
+			log.Println(err)
+			os.Mkdir(storageDirPath, 0777)
+		}
+
 		f, fHeaders, err := r.FormFile("image")
 		if err != nil {
 			log.Println(err)
@@ -70,11 +75,6 @@ func main() {
 	})
 
 	r.Get("/images/*", func(w http.ResponseWriter, r *http.Request) {
-		if stat, err := os.Stat(storageDirPath); err != nil || !stat.IsDir() {
-			// os.Mkdir(dirPath, 0666)
-			os.Mkdir(storageDirPath, 0777)
-		}
-
 		rctx := chi.RouteContext(r.Context())
 		pathPrefix := strings.TrimSuffix(rctx.RoutePattern(), "/*")
 		fs := http.StripPrefix(pathPrefix, http.FileServer(http.Dir(storageDirPath)))
@@ -90,5 +90,5 @@ func main() {
 		fs.ServeHTTP(w, r)
 	})
 
-	http.ListenAndServe("127.0.0.1:4000", r)
+	http.ListenAndServe(":4000", r)
 }

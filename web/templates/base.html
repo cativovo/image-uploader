@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Uploader</title>
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+  </head>
+  <body>
+    <input
+      type="file"
+      name="image"
+      accept="image/png,image/jpeg,image/jpg"
+      hx-post="/upload"
+      hx-encoding="multipart/form-data"
+      hx-swap="outerHTML"
+    />
+  </body>
+</html>

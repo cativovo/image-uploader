@@ -43,6 +43,11 @@
 
         uploadImage(file);
       }
+
+      function copyImageSrc() {
+        const imgSrc = document.getElementById("img-src").innerHTML.trim();
+        navigator.clipboard.writeText(imgSrc);
+      }
     </script>
   </head>
   <body>

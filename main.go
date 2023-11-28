@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -53,11 +54,17 @@ func main() {
 			return
 		}
 
-		log.Println(filename)
+		protocol := "http"
+
+		if r.TLS != nil {
+			protocol += "s"
+		}
+
+		filePath := fmt.Sprintf("%s://%s/images/%s", protocol, r.Host, filename)
 
 		w.WriteHeader(http.StatusCreated)
 		imageComponent.Execute(w, map[string]any{
-			"ImageSrc": "images/" + filename,
+			"ImageSrc": filePath,
 			"Filename": filename,
 		})
 	})

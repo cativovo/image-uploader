@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Uploader</title>
     <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <link rel="stylesheet" href="public/index.css" />
   </head>
   <body>
-    <input
-      type="file"
-      name="image"
-      accept="image/png,image/jpeg,image/jpg"
-      hx-post="/upload"
-      hx-encoding="multipart/form-data"
-      hx-swap="outerHTML"
-    />
+    <label for="image" class="text-red-600">
+      test
+      <input
+        id="image"
+        type="file"
+        name="image"
+        accept="image/png,image/jpeg,image/jpg"
+        hx-post="/upload"
+        hx-encoding="multipart/form-data"
+        hx-swap="outerHTML"
+      />
+    </label>
   </body>
 </html>

@@ -75,5 +75,13 @@ func main() {
 		fs.ServeHTTP(w, r)
 	})
 
+	r.Get("/public/*", func(w http.ResponseWriter, r *http.Request) {
+		rctx := chi.RouteContext(r.Context())
+		pathPrefix := strings.TrimSuffix(rctx.RoutePattern(), "/*")
+		fs := http.StripPrefix(pathPrefix, http.FileServer(http.Dir("public")))
+
+		fs.ServeHTTP(w, r)
+	})
+
 	http.ListenAndServe("127.0.0.1:4000", r)
 }

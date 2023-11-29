@@ -25,7 +25,7 @@ func main() {
 	r.Use(middleware.Logger)
 	storageDirPath := "images"
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/", func(w http.ResponseWriter, _ *http.Request) {
 		homePage.Execute(w, nil)
 	})
 
@@ -52,6 +52,7 @@ func main() {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
+		defer dst.Close()
 
 		if _, err := io.Copy(dst, f); err != nil {
 			log.Println(err)
